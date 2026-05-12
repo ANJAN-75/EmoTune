@@ -1,5 +1,5 @@
 const express=require("express")
-const registerController=require("../controllers/auth.controller")
+const {registerController,LoginController}=require("../controllers/auth.controller")
 
 const authRoute=express.Router()
 
@@ -9,5 +9,5 @@ const authRoute=express.Router()
 authRoute.post("/register",registerController)
 
 
-
+authRoute.post("/login",LoginController)
 module.exports=authRoute
