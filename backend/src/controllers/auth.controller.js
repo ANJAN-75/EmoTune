@@ -1,4 +1,5 @@
 const Usermodel = require("../models/user.model");
+const blacklistModel=require("../models/blacklist.model")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 //register controller
@@ -42,9 +43,9 @@ const registerController = async (req, res) => {
 //Login Controller
 const LoginController = async (req, res) => {
   const { email, username, password } = req.body;
-  const existingUser =await  Usermodel.findOne({
+  const existingUser = await Usermodel.findOne({
     $or: [{ email: email }, { username: username }],
-  });
+  }).select("password");
   if(!existingUser){
     return res.status(404).json({
       message:"Invalid credential"
@@ -70,5 +71,30 @@ const LoginController = async (req, res) => {
     }
   })
 };
+//get-me controller
+//private api
+const getMeController=async(req,res)=>{
+  const userId=req.user.id
+  const user=await Usermodel.findById(userId)
+  res.status(200).json({
+    message:"user fatched sucessfully",
+    data:user
+  })
 
-module.exports = {registerController,LoginController};
+}
+//Logout controller
+//private api
+const logoutController=async(req,res)=>{
+  const token=req.cookies.token
+  res.clearCookie("token")
+  const blacklisttoken=await blacklistModel.create({
+    token:token
+  })
+  res.status(200).json({
+    message:"token blacklisted sucessfully",
+    blacklisttoken:token
+  })
+}
+
+
+module.exports = {registerController,LoginController,getMeController,logoutController};
