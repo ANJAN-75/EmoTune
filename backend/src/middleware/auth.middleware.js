@@ -1,10 +1,11 @@
 const Usermodel=require("../models/user.model")
 const blacklistModel=require("../models/blacklist.model")
 const jwt=require("jsonwebtoken")
+const redis = require("../config/cache")
 
 const authUser=async(req,res,next)=>{
     const token=req.cookies.token
-    const blacklist=blacklistModel.findOne(token)
+    const blacklist=await redis.get(token)
     if(blacklist){
         return res.status(404).json({
             message:"invalid token"
