@@ -45,19 +45,19 @@ const registerController = async (req, res) => {
 };
 //Login Controller
 const LoginController = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { loginId, password } = req.body;
   const existingUser = await Usermodel.findOne({
-    $or: [{ email: email }, { username: username }],
-  }).select("password");
+    $or: [{ email: loginId }, { username: loginId }],
+  }).select("+password");
   if(!existingUser){
     return res.status(404).json({
-      message:"Invalid credential"
+      message:"Invalid credential 1"
     })
   }
   const validPass=await bcrypt.compare(password,existingUser.password)
   if(!validPass){
     return res.status(404).json({
-      message:"Invalid credential"
+      message:"Invalid credential 2"
     })
   }
   const token=jwt.sign(
@@ -69,8 +69,8 @@ const LoginController = async (req, res) => {
   res.status(200).json({
     message:"Login Sucessfull",
     data:{
-      email,
-      username
+      email:existingUser.email,
+      username:existingUser.username
     }
   })
 };
