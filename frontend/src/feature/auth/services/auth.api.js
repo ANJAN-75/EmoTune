@@ -22,3 +22,13 @@ export const register=async(username,email,password)=>{
     })
     return response.data
 }
+
+export const getMe=async()=>{
+    const response=await api.get("/getme")
+    return response.data
+}
+
+export const logOut=async()=>{
+    const response=await api.get("/logout")
+    return response.data
+}

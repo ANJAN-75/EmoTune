@@ -1,7 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import {AuthProvider} from "./feature/auth/auth.contex.jsx";
+import { AuthProvider } from "./feature/auth/auth.contex.jsx";
+import { BrowserRouter } from "react-router";
 
 import App from "./App.jsx";
 

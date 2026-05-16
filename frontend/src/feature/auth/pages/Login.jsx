@@ -1,14 +1,21 @@
 import React,{useState} from "react";
 import "./form.scss";
 import { UseAuth } from "../hook/useAuth";
+import {Link,useNavigate} from "react-router"
 const Login = () => {
   const { user, loading, handleLogin } = UseAuth()
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const navigate=useNavigate()
   const handelSubmit = async (e) => {
     e.preventDefault();
-    await handleLogin(userId,password)
-    console.log("login sucessfully")
+
+  
+    console.log("submited")
+    await handleLogin(userId, password);
+    console.log("navigating");
+    navigate("/");
+  
   };
   return (
     <div>
@@ -28,6 +35,7 @@ const Login = () => {
             />
             <button type="submit">Submit</button>
           </form>
+          <p>Don’t have an account? <Link to={"/register"}>register</Link></p>
         </div>
       </main>
     </div>
