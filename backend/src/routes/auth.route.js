@@ -21,3 +21,6 @@ authRoute.get("/getme",authUser,getMeController)
 
 //LOGOUT-api/auth/logout
 authRoute.get("/logout",authUser,logoutController)
+
+
+module.exports=authRoute

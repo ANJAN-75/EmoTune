@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-// import { init, detect } from "../utils/utils";
-import { init,detect } from "./utils/utils";
+import { init, detect } from "./utils/utils";
+import "./styles/face.scss";
 
 export default function FaceExpression() {
   const videoRef = useRef(null);
@@ -29,16 +29,13 @@ export default function FaceExpression() {
   }, []);
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <video
-        ref={videoRef}
-        style={{ width: "400px", borderRadius: "12px" }}
-        playsInline
-      />
+    <div className="video_container">
+      <video className="video" ref={videoRef} playsInline />
 
       <h2>{expression}</h2>
 
       <button
+        className="ditect-button"
         onClick={() =>
           detect({
             landmarkerRef,
