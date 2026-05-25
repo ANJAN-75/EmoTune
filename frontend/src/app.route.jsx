@@ -1,13 +1,14 @@
-import {createBrowserRouter} from "react-router"
+import {createBrowserRouter} from "react-router-dom"
 import FaceExpression from "./feature/expression/Facialexpression"
 import Login from "./feature/auth/pages/Login"
 import Register from "./feature/auth/pages/Register"
 import Protected from "./feature/auth/components/protected"
+import Home from "./feature/home/pages/Home"
 
 export const router=createBrowserRouter([
     {
         path:"/",
-        element:<Protected><FaceExpression/></Protected>
+        element:<Protected><Home/></Protected>
     },
     {
         path:"/login",

@@ -1,14 +1,17 @@
-import React from 'react'
-import { RouterProvider } from 'react-router'
-import {router} from "./app.route"
-// import FaceExpression from './feature/expression/Facialexpression'
-// import Login from './pages/auth/login'
-
+import React from "react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./app.route";
+import { AuthProvider } from "./feature/auth/auth.contex";
+import {SongProvider} from "./feature/home/song.context"
 
 const App = () => {
   return (
-    <RouterProvider router={router}/>
-  )
-}
+    <AuthProvider>
+      <SongProvider>
+        <RouterProvider router={router} />
+      </SongProvider>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;
